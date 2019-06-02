@@ -1,0 +1,5 @@
+heroku run python manage.py makemigrations --app arc-heroku
+heroku run python manage.py migrate --app arc-heroku
+heroku run python manage.py createsuperuser --app arc-heroku
+
+Agregar modelo de Registro y Alumnos
