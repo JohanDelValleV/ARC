@@ -1,16 +1,11 @@
-
-# Paqueterias a instalar
-# # pip install django-heroku
-# # dj-database-url
-# # gunicorn
-# # whitenoise
-# # python-decouple
-
 import os
-# Importaciones necesarios de heroku inicio
-import dj_database_url
+
 from decouple import config
-# Importaciones necesarios de heroku fin
+import dj_database_url
+
+import environ
+env = environ.Env()
+environ.Env.read_env('./.env')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,9 +18,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,7 +36,7 @@ INSTALLED_APPS = [
     # Agregando aplicaciones independientes de Django
     'Login',
     'example',
-    'Alumno',
+    'RFID',
     'rest_framework',
     'rest_framework.authtoken',
 ]
@@ -54,7 +49,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 SITE_ID = 1
@@ -129,38 +123,21 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+print('lol')
+SECRET_KEY = '-(!w4wx5fc34(gk703+u40_sctk-m406q^ibl)(f27t!snw45#'#env('SECRET_KEY')
+DATABASES = {
+    'default': {
+        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+        'NAME' : env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': '5432'
+    }
+} 
 
-try:
-    from arqui.local_settings import *
-except ImportError:
-    try:
-        from arqui.rasp_settings import *
-    except ImportError:
-        pass
-
-if not DEBUG:
-    SECRET_KEY = 'SECRET_KEY'
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=config('DATABASE_URL')
-        )
-        # 'default': {
-        #     'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-        #     'NAME' : 'DB_NAME',
-        #     'USER': 'DB_USER',
-        #     'PASSWORD': 'DB_PASSWORD',
-        #     'HOST': 'DB_HOST',
-        #     'PORT': 'DB_PORT'
-        # }
-    } 
-
-    import django_heroku
-    django_heroku.settings(locals())
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    # import django_heroku
+    # django_heroku.settings(locals())

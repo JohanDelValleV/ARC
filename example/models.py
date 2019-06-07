@@ -12,6 +12,3 @@ class Example(models.Model):
 
     class Meta:
         db_table = 'Example'
-
-
-# Create your models here.
