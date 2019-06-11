@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['']
 
 
 # Application definition
@@ -32,11 +32,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # Agregando aplicaciones independientes de Django
     'Login',
     'example',
-    'RFID',
+    'Alumno',
     'rest_framework',
     'rest_framework.authtoken',
 ]
@@ -126,8 +124,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-print('lol')
-SECRET_KEY = '-(!w4wx5fc34(gk703+u40_sctk-m406q^ibl)(f27t!snw45#'#env('SECRET_KEY')
+print('Raspberry')
+SECRET_KEY = env('SECRET_KEY')
 DATABASES = {
     'default': {
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
@@ -138,6 +136,3 @@ DATABASES = {
         'PORT': '5432'
     }
 } 
-
-    # import django_heroku
-    # django_heroku.settings(locals())

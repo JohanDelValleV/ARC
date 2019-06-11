@@ -141,6 +141,7 @@ try:
 except ImportError:
     try:
         from arqui.rasp_settings import *
+        print('Hola')
     except ImportError:
         pass
 
