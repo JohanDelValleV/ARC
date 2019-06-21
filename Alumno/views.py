@@ -45,6 +45,7 @@ class AlumnoDetail(APIView):
             if serializer.is_valid():
                 serializer.save()
                 datas = serializer.data
+                return Response(datas)
             else:
                 return Response(alumno, status = status.HTTP_400_BAD_REQUEST)
             
