@@ -1,11 +1,3 @@
-
-# Paqueterias a instalar
-# # pip install django-heroku
-# # dj-database-url
-# # gunicorn
-# # whitenoise
-# # python-decouple
-
 import os
 # Importaciones necesarios de heroku inicio
 import dj_database_url
@@ -103,6 +95,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 6,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -141,7 +136,6 @@ try:
 except ImportError:
     try:
         from arqui.rasp_settings import *
-        print('Hola')
     except ImportError:
         pass
 
