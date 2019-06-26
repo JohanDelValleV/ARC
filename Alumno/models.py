@@ -1,7 +1,9 @@
 from django.db import models
 from django.utils import timezone
 
+
 class Alumno(models.Model):
+    id_rfid = models.IntegerField(null=False)
     name = models.CharField(max_length=100, null=False)
     lastname = models.CharField(max_length=100, null=False)
     matricula = models.IntegerField(null=False)
