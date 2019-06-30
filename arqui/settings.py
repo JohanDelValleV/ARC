@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'Login',
     'example',
     'Alumno',
+    'Rfid',
     'rest_framework',
     'rest_framework.authtoken',
 ]
