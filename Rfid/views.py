@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from django.http import Http404
+from django.http import Http404, JsonResponse
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -20,12 +20,13 @@ class RfidList(APIView):
         if serializer.is_valid():
             serializer.save()
             datas = serializer.data
-            return Response(datas)
+            return JsonResponse({'id':datas['id']})
         return Response(serializer.errors, status=status.HTTP_404_BAD_REQUEST)
         
 class RfidDetail(APIView):
+    def get_object(self, id):
         try:
-            return Rfid.objects.get(pk=id)
+            return Rfid.objects.get(id_rfid=id)
         except:
             return 404
 
