@@ -27,4 +27,5 @@ urlpatterns = [
     re_path(r'^api/v1/example/', include('example.urls')),
     re_path(r'^api/v1/alumno/', include('Alumno.urls')),
     re_path(r'^api/v1/rfid/', include('Rfid.urls')),
+    re_path(r'^api/v1/asistencia/', include('Asistencia.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils import timezone
+from Rfid.models import Rfid
 
 # Create your models here.
 class Asistencia(models.Model):
-    id_rfidAlumno= models.IntegerField(null=False)
+    id_rfid= models.ForeignKey(Rfid,on_delete=models.CASCADE)
     delete = models.BooleanField(default=False)
     create = models.DateTimeField(default=timezone.now)
     

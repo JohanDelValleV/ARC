@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'Login',
     'example',
     'Alumno',
-    'Rfid',
     'Asistencia',
+    'Rfid',
     'rest_framework',
     'rest_framework.authtoken',
 ]
@@ -108,6 +108,14 @@ DATABASES = {
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '5432',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql', 
+    #     'NAME': 'django',
+    #     'USER': 'root',
+    #     'PASSWORD': 'monopoli',
+    #     'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+    #     'PORT': '3306',
+    # }
 }
 
 
@@ -133,7 +141,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'es-mx'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 

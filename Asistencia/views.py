@@ -7,20 +7,24 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
-from Rfid.models import Rfid
+from Rfid.views import RfidDetail, RfidList
+
 from Asistencia.models import Asistencia
 from Asistencia.serializer import AsistenciaSerializers
 
 # Create your views here.
- 
-
 class AsistenciaCheckout(APIView):
     def get(self, request, format=None):
         queryset = Asistencia.objects()
         serializer = AsistenciaSerializers(queryset, many=True)
         return Response(serializer.data)
 
-    def post(self, request, id, format=None):
+    def post(self, request, rfid, format=None):
+        data = RfidDetail.get_object(self, rfid)
+        if(data != 404):
+            RfidList.post(self, request, format=None)
+        else:
+            data = 1
         serializer = AsistenciaSerializers(data = request.data)
         if serializer.is_valid():
             serializer.save()
