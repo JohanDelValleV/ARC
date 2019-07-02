@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'example',
     'Alumno',
     'Rfid',
+    'Asistencia',
     'rest_framework',
     'rest_framework.authtoken',
 ]
@@ -100,12 +101,12 @@ WSGI_APPLICATION = 'arqui.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'django',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': 'django2',
+        'USER': 'postgres',
+        'PASSWORD': 'vasquez123',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'PORT': '5432',
     }
 }
 
