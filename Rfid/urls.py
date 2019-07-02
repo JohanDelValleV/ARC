@@ -5,6 +5,6 @@ from django.contrib.auth.models import User
 from Rfid import views
  
 urlpatterns = [
-    re_path(r'rfid_lista/$', views.RfidList.as_view()),
-    re_path(r'rfid_detail/(?P<id>\d+)$', views.RfidDetail.as_view()),
+    re_path(r'rfid/$', views.RfidList.as_view()),
+    re_path(r'rfid/(?P<id>\d+)$', views.RfidDetail.as_view()),
 ]
