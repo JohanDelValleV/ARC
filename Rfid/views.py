@@ -22,6 +22,9 @@ class RfidList(APIView):
         if serializer.is_valid():
             serializer.save()
             datas = serializer.data
+            return JsonResponse({'id':datas['id']})
+        return Response(serializer.errors, status=status.HTTP_404_BAD_REQUEST)
+        
 class RfidDetail(APIView):
         try:
             return Rfid.objects.get(id_rfid=id)
