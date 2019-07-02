@@ -20,14 +20,14 @@ class RfidList(APIView):
         if serializer.is_valid():
             serializer.save()
             datas = serializer.data
-            return Response(datas)
+            return Response(datas["id"])
         return Response(serializer.errors, status=status.HTTP_404_BAD_REQUEST)
 
 class RfidDetail(APIView):
     def get_object(self, id):
         try:
-            return Rfid.objects.get(pk=id)
-        except Rfid.DoesNotExit:
+            return Rfid.objects.get(id_rfid=id)
+        except:
             return 404
 
     def get(self, request, id , format=None):
