@@ -27,7 +27,7 @@ class RfidDetail(APIView):
     def get_object(self, id):
         try:
             return Rfid.objects.get(pk=id)
-        except Rfid.DoesNotExit:
+        except:
             return 404
 
     def get(self, request, id , format=None):
@@ -36,7 +36,7 @@ class RfidDetail(APIView):
             serializer = RfidSerializers(rfid)
             return Response(serializer.data)
         else:
-            return Response(rfid)
+            return Response(rfid, status=status.HTTP_404_BAD_REQUEST)
 
     def put(self, request, id, format=None):
         rfid = self.get_object(id)
