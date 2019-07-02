@@ -24,7 +24,7 @@ class RfidList(APIView):
             datas = serializer.data
             return JsonResponse({'id':datas['id']})
         return Response(serializer.errors, status=status.HTTP_404_BAD_REQUEST)
-
+        
 class RfidDetail(APIView):
     def get_object(self, id):
         try:
