@@ -5,7 +5,7 @@ from Alumno.models import Alumno
 
 class Rfid(models.Model):
     id_rfid = models.IntegerField(null=False)
-    id_alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
+    id_alumno = models.OneToOneField(Alumno, on_delete=models.CASCADE)
     created = models.DateTimeField(default=timezone.now)
     def _str_(self):
         return self
