@@ -13,7 +13,7 @@ from Rfid.serializer import RfidSerializers
 
 class RfidList(APIView):    
     def get(self, request, format=None):
-        queryset = Rfid.objects.filter(delete=False)
+        queryset = Rfid.objects
         serializer = RfidSerializers(queryset, many=True)
         return Response(serializer.data)
 
@@ -23,7 +23,7 @@ class RfidList(APIView):
             serializer.save()
             datas = serializer.data
             return JsonResponse({'id':datas['id']})
-        return Response(serializer.errors, status=status.HTTP_404_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 class RfidDetail(APIView):
     def get_object(self, id):
@@ -49,4 +49,4 @@ class RfidDetail(APIView):
                 datas = serializer.data
                 return Response(datas)
             else:
-                return Response(rfid, status=status.HTTP_404_BAD_REQUEST)
+                return Response(rfid, status=status.HTTP_400_BAD_REQUEST)
