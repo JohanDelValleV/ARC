@@ -122,3 +122,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 arqui/local_settings.py
+arqui/local_settings.py
