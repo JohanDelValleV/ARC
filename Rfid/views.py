@@ -9,7 +9,9 @@ from rest_framework import generics
 from Rfid.models import Rfid
 from Rfid.serializer import RfidSerializers
 
-class RfidList(APIView):
+
+
+class RfidList(APIView):    
     def get(self, request, format=None):
         queryset = Rfid.objects.filter(delete=False)
         serializer = RfidSerializers(queryset, many=True)
