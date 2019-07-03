@@ -20,7 +20,7 @@ class AlumnoList(APIView):
         if serializer.is_valid():
             serializer.save()
             datas = serializer.data
-            return Response(datas)
+            return Response(datas["id"])
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class AlumnoDetail(APIView):
