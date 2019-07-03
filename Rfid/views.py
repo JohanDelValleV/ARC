@@ -11,6 +11,7 @@ from Rfid.serializer import RfidSerializers
 
 
 
+
 class RfidList(APIView):    
     def get(self, request, format=None):
         queryset = Rfid.objects.filter(delete=False)
@@ -19,11 +20,12 @@ class RfidList(APIView):
 
     def post(self, request, format=None):
         serializer = RfidSerializers(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid():            
             serializer.save()
             datas = serializer.data
             return JsonResponse({'id':datas['id']})
-        return Response(serializer.errors, status=status.HTTP_404_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        print('hola')
         
 class RfidDetail(APIView):
     def get_object(self, id):
