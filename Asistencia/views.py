@@ -28,49 +28,37 @@ class AsistenciaCheckout(APIView):
 
     def post(self, request, format=None):
         try:
-            data = Rfid.objects.get(id_rfid=request.POST['rfidn'])
+            data = Rfid.objects.get(id_rfid=request.POST['rfid'])
         except:
             return Response(404)
 
         x = datetime.now()
-        data = RfidDetail.get_object(self, request.POST['rfidn'])
-        print(data)
-        if(data == 404):                                                                
-            RfidList.post(self, request, format=None)       
-            print('i') 
-        serializer = AsistenciaSerializers(data = request.data)
+      
+        id_rfid = int(request.POST['rfid'])  
+        a = str(x.year)
+        m = str(x.month)
+        d = str(x.day)
+        fechaCompara = a + "-" + m + "-" + d
+        print(a + "-" + m + "-" + d)
+                
+        try:
+            post = Asistencia.objects.get(rfid_id=id_rfid,fecha= datetime.strptime(fechaCompara, "%Y-%m-%d").date())
+            print(post)     
+            print("hola")
+            if post.rfid_id == id_rfid and post.fecha == datetime.strptime(fechaCompara, "%Y-%m-%d").date():
+                return Response('Ya existe')
+            else:
+                print('que')     
+        except:
+            datos= {"rfid":data.id,"rfidn":data.id_rfid,"id_alumno":data.id_alumno,"id_rfid":data.id_rfid}
+            serializer = AsistenciaSerializers(data = datos)
+            if serializer.is_valid():
+                serializer.save()
+                datas = serializer.data
+                return Response(datas)
+            else:
+                return Response(serializer.data)
         
-        if serializer.is_valid():
-            id_rfid = int(request.POST['rfid'])                   
-            # print ("Formato dd/mm/yyyy =  %s-%s-%s" % (x.year, x.month, x.day) )
-            # fecha1 =" %s-0%s-0%s" % (x.year, x.month, x.day) 
-            # from datetime import datetime
-            a = str(x.year)
-            m = str(x.month)
-            d = str(x.day)
-            fechaCompara = a + "-" + m + "-" + d
-            print(a + "-" + m + "-" + d)
-
-                  
-            try:
-                post = Asistencia.objects.filter(rfid_id=id_rfid,fecha= datetime.strptime(fechaCompara, "%Y-%m-%d").date())
-                print(post)     
-                print("hola")
-                if post[1].rfid_id == id_rfid and post[1].fecha == datetime.strptime(fechaCompara, "%Y-%m-%d").date():
-                    return Response('Ya existe')
-                # else:
-                #     serializer.save()
-                #     datas = serializer.data
-                #     return Response(datas)        
-            except:
-                datos= {"rfid":data.id,"rfidn":data.id_rfid,"id_alumno":data.id_alumno,"id_rfid":data.id_rfid}
-                serializer = AsistenciaSerializers(data = datos)
-                if serializer.is_valid():
-                    serializer.save()
-                    datas = serializer.data
-                    return Response(datas)
-                else:
-                    return Response(serializer.data)
                 
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
