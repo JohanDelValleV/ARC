@@ -27,15 +27,13 @@ class AsistenciaCheckout(APIView):
             #
             print('hola')
             RfidList.post(self, request, format=None)
-        else:
-            print('data')
-            serializer = AsistenciaSerializers(data = request.data)
-            if serializer.is_valid():
-                serializer.save()
-                datas = serializer.data
-                return Response(datas)
-            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-        return Response(status = status.HTTP_400_BAD_REQUEST)
+        print('data')
+        serializer = AsistenciaSerializers(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            datas = serializer.data
+            return Response(datas)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 
 
