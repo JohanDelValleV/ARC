@@ -38,7 +38,7 @@ class RfidDetail(APIView):
             serializer = RfidSerializers(rfid)
             return Response(serializer.data)
         else:
-            return Response(rfid, status=status.HTTP_404_BAD_REQUEST)
+            return Response(rfid)
 
     def put(self, request, id, format=None):
         rfid = self.get_object(id)
