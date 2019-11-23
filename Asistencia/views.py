@@ -42,13 +42,12 @@ class AsistenciaCheckout(APIView):
         print(a + "-" + m + "-" + d)
                 
         try:
-            post = Asistencia.objects.get(rfid_id=id_rfid,fecha= datetime.strptime(fechaCompara, "%Y-%m-%d").date())
+            post = Asistencia.objects.get(rfid_id=data.id,fecha= datetime.strptime(fechaCompara, "%Y-%m-%d").date())
             print(post)     
-            print("hola")
             if post.rfid_id == id_rfid and post.fecha == datetime.strptime(fechaCompara, "%Y-%m-%d").date():
                 return Response('Ya existe')
             else:
-                print('que')     
+                 return Response('Ya existe jaja')     
         except:
             datos= {"rfid":data.id,"rfidn":data.id_rfid,"id_alumno":data.id_alumno,"id_rfid":data.id_rfid}
             serializer = AsistenciaSerializers(data = datos)
@@ -60,7 +59,7 @@ class AsistenciaCheckout(APIView):
                 return Response(serializer.data)
         
                 
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        #return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 
 
